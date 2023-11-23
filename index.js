@@ -1,12 +1,21 @@
-console.log(1234);
-import http from 'http';
+import express from "express"
 
+const app = express()
 
-http.createServer((request, response) => {
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.write('Hello Web!');
-    
-    response.end();
-}).listen(4000)
+app.get('/', (req, res)=>{
+    response.send('hallooo');
+});
 
+app.get('/about', (req, res)=>{
+    console.log(req.query);
+    res.send('ABOUT:');
+});
 
+app.get('/products/:id([0-9]*)', (req, res)=>{
+    console.log(req.params);
+    res.send('Produkter');
+});
+
+app.listen(4000, () => {
+    console.log('nu kører serveren med express');
+});
